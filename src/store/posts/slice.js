@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   posts: [],
   details: null,
+  comments: [],
 };
 
 export const postsSlice = createSlice({
@@ -14,8 +15,10 @@ export const postsSlice = createSlice({
       state.posts = [...state.posts, ...action.payload];
     },
     FetchById: (state, action) => {
-      //   console.log("details action", action);
-      state.details = action.payload;
+      // console.log("details action", action);
+      // console.log("comments action in slice", action);
+      state.details = action.payload.post;
+      state.comments = action.payload.comment;
     },
   },
 });

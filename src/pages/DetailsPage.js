@@ -2,13 +2,16 @@ import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
+
 import { getPostById } from "../store/posts/thunks";
-import { selectDetails } from "../store/posts/selectors";
+import { selectComments, selectDetails } from "../store/posts/selectors";
 const DetailsPage = () => {
   const params = useParams();
   const dispatch = useDispatch();
   const getDetailsofPost = useSelector(selectDetails);
-  console.log("details selector", getDetailsofPost);
+  const getComments = useSelector(selectComments);
+  console.log("comments from selector", getComments);
+  //   console.log("details selector", getDetailsofPost);
   const { id } = params;
 
   useEffect(() => {
@@ -23,7 +26,7 @@ const DetailsPage = () => {
         <div>
           <h2>{getDetailsofPost.title}</h2>
           <h3>developer name:{getDetailsofPost.developer.name}</h3>
-          {/* <p>{getDetailsofPost.content}</p> */}
+          <p>{getDetailsofPost.content}</p>
           <div>
             technologies:
             {getDetailsofPost.developer.technologies.map((p, i) => {
@@ -55,6 +58,24 @@ const DetailsPage = () => {
           </p>
         </div>
       )}
+      <div>
+        <h2 style={{ color: "green", textDecoration: "underline" }}>
+          comments
+        </h2>
+        {!getComments ? (
+          <p>Loading...</p>
+        ) : (
+          getComments.map((c) => {
+            return (
+              <div key={c.id}>
+                <ul>
+                  <li>{c.text}</li>
+                </ul>
+              </div>
+            );
+          })
+        )}
+      </div>
       <Link to="/">
         <button>Back</button>
       </Link>
