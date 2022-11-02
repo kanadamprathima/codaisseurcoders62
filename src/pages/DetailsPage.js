@@ -1,4 +1,5 @@
 import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getPostById } from "../store/posts/thunks";
@@ -7,7 +8,7 @@ const DetailsPage = () => {
   const params = useParams();
   const dispatch = useDispatch();
   const getDetailsofPost = useSelector(selectDetails);
-  //   console.log("details selector", getDetailsofPost);
+  console.log("details selector", getDetailsofPost);
   const { id } = params;
 
   useEffect(() => {
@@ -54,6 +55,9 @@ const DetailsPage = () => {
           </p>
         </div>
       )}
+      <Link to="/">
+        <button>Back</button>
+      </Link>
     </div>
   );
 };

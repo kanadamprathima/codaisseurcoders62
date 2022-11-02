@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  posts: null,
+  posts: [],
   details: null,
 };
 
@@ -11,7 +11,7 @@ export const postsSlice = createSlice({
   reducers: {
     postsFetched: (state, action) => {
       //   console.log("posts action", action);
-      state.posts = action.payload;
+      state.posts = [...state.posts, ...action.payload];
     },
     FetchById: (state, action) => {
       //   console.log("details action", action);
