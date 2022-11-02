@@ -4,6 +4,7 @@ import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
 import { selectPosts } from "../store/posts/selectors";
 import { getPosts } from "../store/posts/thunks";
+import PostCard from "../components/PostCard";
 const HomePage = () => {
   const dispatch = useDispatch();
   const getAllposts = useSelector(selectPosts);
@@ -20,29 +21,19 @@ const HomePage = () => {
         getAllposts.map((item) => {
           return (
             <div key={item.id}>
-              <h2>{item.title}</h2>
-              {/* <p>{item.content}</p> */}
-              <p>
-                {moment(item.createdAt).format("DD-MM-YYYY")}&bull;
-                <span
-                  className="tags"
-                  style={{
-                    borderRadius: 5,
-                    padding: 5,
-                    fontWeight: "bold",
-                    color: "white",
-                    background: "#555",
-                  }}
-                >
-                  {item.tags.map((tag, index) => {
-                    return (
-                      <React.Fragment key={index}>
-                        <span>{tag.tag}</span>
-                      </React.Fragment>
-                    );
-                  })}
-                </span>
-              </p>
+              <PostCard
+                id={item.id}
+                title={item.title}
+                date={moment(item.createdAt).format("DD-MM-YYYY")}
+                tags={item.tags.map((tag, index) => {
+                  return (
+                    <React.Fragment key={index}>
+                      <span>{tag.tag}</span>
+                    </React.Fragment>
+                  );
+                })}
+                des={item.content}
+              />
             </div>
           );
         })
