@@ -12,12 +12,20 @@ export const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    userLogin: (state, action) => {
-      console.log("action", action);
+    loginSuccess: (state, action) => {
+      //   console.log("action", action);
+      const { token, profile } = action.payload;
+      state.profile = profile;
+      state.token = token;
+    },
+    logOut: (state) => {
+      localStorage.removeItem("token");
+      state.token = null;
+      state.profile = null;
     },
   },
 });
 
-export const { login } = userSlice.actions;
+export const { loginSuccess, logOut } = userSlice.actions;
 
 export default userSlice.reducer;

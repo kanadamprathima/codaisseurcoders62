@@ -2,19 +2,19 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { userLogin } from "../store/user/thunks";
 import "./Login.css";
-// import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 const LoginPage = () => {
   const dispatch = useDispatch();
   const [email, setEmail] = useState("kelley@codaisseur.com");
   const [password, setPassword] = useState("abcd");
-  // const navigator = useNavigate();
+  const navigator = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
     dispatch(userLogin(email, password));
     //navigate to home page to see all products
 
     console.log("login credentials", email, password);
-    // navigator("/");
+    navigator("/");
   };
 
   return (
