@@ -3,10 +3,12 @@ import React from "react";
 import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
 import { selectPosts } from "../store/posts/selectors";
+import { selectUser } from "../store/user/selectors";
 import { getPosts } from "../store/posts/thunks";
 import PostCard from "../components/PostCard";
 const HomePage = () => {
   const dispatch = useDispatch();
+  const alluser = useSelector(selectUser);
   const getAllposts = useSelector(selectPosts);
   //   console.log("allposts on homepage", getAllposts);
   useEffect(() => {
